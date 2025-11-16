@@ -22,7 +22,7 @@ public class Car extends Thread{
 			sleep(rand.nextLong(1000, 5000));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Thread interruoted");
+			System.out.println("Thread interrupted");
 		}
 		
 		//Sale del parking
