@@ -23,15 +23,14 @@ public class Entero extends Thread {
 	public void leer(int id) {
 		synchronized(this) {
 			try {
-				while(hayEscritor || lectoresAltaEsperando>0) {
+				while(hayEscritor || lectoresAltaEsperando>0  ) {
 					wait();
-					lectoresAltaEsperando--;
-					numLectores++;
+					lectoresMediaEsperando++;
+					//hebra.getPrioridad==baja
 				}
 			}catch(InterruptedException e) {}
-			
+			numLectores++;
 		}
-		
 		//hayEscritor=false;
 		//ojo, con esto otros lectores o escritores podrían entrar
 		//se rompe la exclusión mutua
