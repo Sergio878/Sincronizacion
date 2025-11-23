@@ -3,22 +3,23 @@ package es.upm.aled.ejercicios3;
 import java.util.Random;
 
 public class Productora extends Thread {
-	private int valor;
+	//private int valor;
 	private Buffer buffer;
-	private int[] aProducir;
+	//private int[] aProducir;
 	
-	public Productora(int valor) {
-		this.valor=valor;
-		this.aProducir=new int[10];
-		this.buffer=new Buffer(aProducir);
+	public Productora(Buffer buffer) {
+		//this.valor=valor;
+		//this.aProducir=new int[10];
+		this.buffer=buffer;
 		
 	}
 	
 	@Override
 	public void run() {
-		Random rand=new Random();
-		
-		buffer.produceEntero(rand.nextInt());
+		buffer.produceEntero((int)(Math.random()*10000));
+		try {
+			sleep((long)(Math.random() * 500));
+		}catch(InterruptedException e) {}
 	}
 	
 }

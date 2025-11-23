@@ -4,25 +4,23 @@ public class Puente extends Thread {
 	private int numVehicles;
 	private int pesoPuente;
 	private int waitingEntrar;
-	private boolean nextVehicleIsAmbulance;
-	private int numAmbulancias;
+	private int numAmbulanciasEsperando;
 	
 	public Puente() {
 		this.numVehicles=0;
 		this.pesoPuente=0;
 		this.waitingEntrar=0;
-		this.nextVehicleIsAmbulance=false;
-		this.numAmbulancias=0;
+		this.numAmbulanciasEsperando=0;
 	}
 	
 	public synchronized void entrarPuente(int peso, boolean ambulancia) {
 		this.waitingEntrar++;
 		if(ambulancia) {
-			this.numAmbulancias++;
+			this.numAmbulanciasEsperando++;
 		}	
 		try {
 			while(((peso + pesoPuente) >15000) || numVehicles>10
-					|| (numAmbulancias>0 && !ambulancia)) {
+					|| (numAmbulanciasEsperando>0 && !ambulancia)) {
 				if (ambulancia)
 	                System.out.println("La ambulancia está esperando para entrar");
 	            else
@@ -32,7 +30,7 @@ public class Puente extends Thread {
 		}catch(InterruptedException e) {}
 		this.waitingEntrar--;
 		if(ambulancia) {
-			this.numAmbulancias--;
+			this.numAmbulanciasEsperando--;
 		}
 		this.numVehicles++;
 		this.pesoPuente+=peso;
